@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Side stacker game, varient for connect4</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <div id="parent-container">
+    <div class="player-sign">
+        <p id="player1">player 1</p>
+      <p class="playerPointer" id="playerPointer1"></p>
+
+    </div>
+
+    <div id="grid-container">
+
+    </div>
+    <div class="player-sign">
+        <p id="player2">player 2</p>
+      <p class="playerPointer" id="playerPointer2"></p>
+    </div>
+  </div>
+  <p id="player-turn"></p>
+  <div class="game-control">
+    <button id="button-start" type="button" class="btn green">Start</button>
+    <button id="button-reset" type="button" class="btn red">Reset</button>
+    <!-- Target -->
+    <div class="clipboard">
+      <input id="player2-link" value="" />
+
+      <!-- Trigger -->
+      <button type="button" class="copy-btn" data-clipboard-target="#player2-link" data-clipboard-action="copy"
+        disabled=true>
+        <em class="fa fa-clipboard"></em>
+      </button>
+    </div>
+  </div>
+</body>
+<script type="module" src="/socket.js"></script>
+<script type="module" src="/utility.js"></script>
+<script type="module" src="/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+</html>
