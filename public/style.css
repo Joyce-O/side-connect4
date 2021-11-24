@@ -1,6 +1,6 @@
 :root {
-  --color1: #4c1384;
-  --color0: #6b4205;
+  --color1: #a50404;
+  --color0: #100cf0;
   --redColor: rgb(150, 4, 4);
   --lightGreen: #34bd4b;
 }
@@ -63,20 +63,20 @@ body {
   color: var(--lightGreen);
 }
 
-#player1 {
-  color: var(--color1);
-}
-
-#player2 {
-  color: var(--color0);
-}
-
 .player1-cell {
   background-color: var(--color1);
 }
 
 .player0-cell {
   background-color: var(--color0);
+}
+
+.player1-color {
+  color: var(--color1);
+}
+
+.player0-color {
+  color: var(--color0);
 }
 
 .game-control {
@@ -130,8 +130,8 @@ clipboard-btn::after {
 .green {
   background-color: var(--lightGreen);
 }
-.red {
-  background-color: var(--color1);
+#button-reset {
+  background-color: rgb(12, 0, 12);
 }
 
 .playerPointer {
@@ -141,7 +141,6 @@ clipboard-btn::after {
 #player-turn {
   font-size: 1.2em;
   font-family: "Courier New", Courier, monospace;
-  color: var(--lightGreen);
   font-weight: bold;
   text-align: center;
   font-style: italic;

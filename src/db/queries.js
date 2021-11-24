@@ -45,6 +45,7 @@ export const fetchGame = async (id) => {
     INNER JOIN gridCells ON games.id=gridCells.gameId
     WHERE games.id='${id}'
     ;`
+    
   const game = await pool.promise().query(sql);
   const [result] = game;
   const formatted = Array.from(result);

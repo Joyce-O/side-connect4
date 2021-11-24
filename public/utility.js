@@ -1,6 +1,6 @@
 import { buildGrid } from "./script.js";
 const player1 = document.getElementById("player1");
-const player2 = document.getElementById("player2");
+const player0 = document.getElementById("player0");
 const playerTurn = document.getElementById("player-turn");
 const startBtn = document.getElementById("button-start");
 const resetBtn = document.getElementById("button-reset");
@@ -23,7 +23,7 @@ export const created = (grid, gameId, isHost) => {
     if (!param.get('gameId')) {
         gameOn(gameId, isHost);
         let link = `${window.location.origin}/?gameId=${gameId}&isHost=0`;
-        document.getElementById('player2-link').value = link
+        document.getElementById('player0-link').value = link
     };
 }
 
@@ -36,8 +36,12 @@ export const begin = (stage, turn, grid) => {
 
     if (turn == 1) {
         playerTurn.innerHTML = "Host's turn";
+        playerTurn.classList.add("player1-turn");
+        playerTurn.classList.remove("player0-turn");
     } else {
         playerTurn.innerHTML = "Opponent's turn";
+        playerTurn.classList.add("player0-color");
+        playerTurn.classList.remove("player1-turn");
     }
 };
 
@@ -45,8 +49,12 @@ export function playing(turn, grid, winner, stage) {
     buildGrid(grid);
     if (turn == 1) {
         playerTurn.innerHTML = "Host's turn";
+        playerTurn.classList.add("player1-turn");
+        playerTurn.classList.remove("player0-turn");
     } else {
         playerTurn.innerHTML = "Opponent's turn";
+        playerTurn.classList.add("player0-color");
+        playerTurn.classList.remove("player1-turn");
     }
 }
 
@@ -59,10 +67,10 @@ export function displayWin(winner, grid, stage) {
     }
     if (winner == 1) {
         player1.innerHTML = "player 1 WON!";
-        player2.innerHTML = "player 2 lost!";
+        player0.innerHTML = "player 2 lost!";
         playerTurn.innerHTML = "Game Over!";
     } else {
-        player2.innerHTML = "player 2 WON!";
+        player0.innerHTML = "player 2 WON!";
         player1.innerHTML = "player 1 lost!";
         playerTurn.innerHTML = "Game Over!";
     }

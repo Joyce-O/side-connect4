@@ -43,7 +43,6 @@ const buildGrid = (arr) => {
       }
 
       let gridItem = document.createElement("DIV");
-
       gridItem.className = `grid-item player${colorValue}-cell`;
 
       gridItem.id = id;

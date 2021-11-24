@@ -37,11 +37,6 @@ const onMessage = (evt) => {
 
   }
 
-  if (stage && stage === "PLAYING") {
-    playing(turn, grid, winner)
-
-  }
-
   if (stage && stage === "COMPLETED") {
     completed(grid, winner, stage)
 

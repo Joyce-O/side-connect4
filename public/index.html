@@ -9,7 +9,7 @@
 <body>
   <div id="parent-container">
     <div class="player-sign">
-        <p id="player1">player 1</p>
+        <p class="player1-color" id="player1">player 1</p>
       <p class="playerPointer" id="playerPointer1"></p>
 
     </div>
@@ -18,20 +18,20 @@
 
     </div>
     <div class="player-sign">
-        <p id="player2">player 2</p>
-      <p class="playerPointer" id="playerPointer2"></p>
+        <p class="player0-color" id="player0">player 2</p>
+      <p class="playerPointer" id="playerPointer0"></p>
     </div>
   </div>
-  <p id="player-turn"></p>
+  <p class="" id="player-turn"></p>
   <div class="game-control">
     <button id="button-start" type="button" class="btn green">Start</button>
-    <button id="button-reset" type="button" class="btn red">Reset</button>
+    <button id="button-reset" type="button" class="btn">Reset</button>
     <!-- Target -->
     <div class="clipboard">
-      <input id="player2-link" value="" />
+      <input id="player0-link" value="" />
 
       <!-- Trigger -->
-      <button type="button" class="copy-btn" data-clipboard-target="#player2-link" data-clipboard-action="copy"
+      <button type="button" class="copy-btn" data-clipboard-target="#player0-link" data-clipboard-action="copy"
         disabled=true>
         <em class="fa fa-clipboard"></em>
       </button>

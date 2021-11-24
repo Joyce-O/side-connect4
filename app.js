@@ -5,7 +5,7 @@ import WebSocket from 'ws';
 import { nanoid } from "nanoid";
 const { createServer } = require('http');
 import { initDBTables } from "./src/db/index";
-import { gameInit, gameStart, gamePlaying, gameRefresh } from "./src/db/queries";
+import { gameInit, gameStart, gamePlaying, gameRefresh } from "./src/controller/gameEvents";
 
 const app = express();
 
