@@ -21,7 +21,7 @@ Project is built with:
 
 To run locally
 ```
-$ cd ../side-connect4
+$ cd side-connect4
 $ yarn install
 $ yarn run dev
 $ yarn test
