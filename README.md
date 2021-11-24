@@ -14,6 +14,7 @@ Project is built with:
 * [ExpressJs](http://expressjs.com/)
 * [Ws](https://github.com/websockets/ws)
 * [MochaJs](https://mochajs.org/)
+* [NodeJs](https://nodejs.org)
 	
 ## Setup
 > Clone the repo here https://github.com/Joyce-O/side-connect4.git
