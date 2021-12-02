@@ -6,7 +6,7 @@ const systemPlayer = async (obj) => {
 
   const cellValue = 0;
 
-  const game = await gamePlaying(gameId, turn, stage, cellId, cellValue);
+  const game = await gamePlaying(gameId,stage, cellId, cellValue);
   return game;
 };
 

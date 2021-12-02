@@ -3,8 +3,8 @@ import { addMessage } from "./socket.js";
 const container = document.getElementById("grid-container");
 const startBtn = document.getElementById("button-start");
 const modalParent = document.getElementById("modal");
-const btn1 = document.getElementById("oneTeam");
-const btn2 = document.getElementById("twoTeams");
+const oneTeamBtn = document.getElementById("oneTeam");
+const twoTeamsBtn = document.getElementById("twoTeams");
 
 const clipboard = new ClipboardJS(".copy-btn");
 clipboard.on("success", function (e) {
@@ -18,25 +18,29 @@ clipboard.on("error", function (e) {
 const handlePlayerPointer = (player) => {
   player.preventDefault();
   let param = new URLSearchParams(location.search);
+  const turn = localStorage.getItem("turn");
   const cellValue = param.get("isHost");
-  const turn = cellValue == 1 ? 0 : 1;
+
+  if(turn != cellValue) return;
+
   let cellId = player.target.id;
   let stage = localStorage.getItem('stage') || "PLAYING";
-  param.delete('turn');
-  addMessage({ cellValue, turn, stage, cellId });
+  localStorage.removeItem('turn');
+  
+  addMessage({ cellValue, stage, cellId });
 };
 
 const handleGame = async () => {
   modalParent.style.display = "block";
-  btn1.onclick = function () {
+  oneTeamBtn.onclick = function () {
     modalParent.style.display = "none";
     let teamType = "oneTeam";
     let message = { stage: "BEGIN", teamType };
 
     addMessage(message);
   };
-  
-  btn2.onclick = function () {
+
+  twoTeamsBtn.onclick = function () {
     modalParent.style.display = "none";
     let teamType = "twoTeams";
     let message = { stage: "BEGIN", teamType };
