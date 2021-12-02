@@ -1,7 +1,11 @@
 import { addMessage } from "./socket.js";
+import modal from "./modal.js";
 
 const container = document.getElementById("grid-container");
 const startBtn = document.getElementById("button-start");
+const modalParent = document.getElementById("modal");
+const btn1 = document.getElementById("oneTeam");
+const btn2 = document.getElementById("twoTeams");
 
 const clipboard = new ClipboardJS(".copy-btn");
 clipboard.on("success", function (e) {
@@ -23,10 +27,26 @@ const handlePlayerPointer = (player) => {
   addMessage({ cellValue, turn, stage, cellId });
 };
 
-const handleGame = () => {
-  let message = { stage: "BEGIN" };
-  addMessage(message);
+const handleGame = async () => {
+  modalParent.style.display = "block";
+  btn1.onclick = function () {
+    modalParent.style.display = "none";
+    let teamType = "oneTeam";
+    let message = { stage: "BEGIN", teamType };
+
+    addMessage(message);
+  };
+  
+  btn2.onclick = function () {
+    modalParent.style.display = "none";
+    let teamType = "twoTeams";
+    let message = { stage: "BEGIN", teamType };
+    addMessage(message);
+  };
+
 };
+
+
 
 startBtn.addEventListener("click", handleGame);
 

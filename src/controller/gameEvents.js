@@ -23,14 +23,15 @@ export const gameInit = async (id, isHost) => {
 
 export const gameRefresh = async (id, isHost) => {
     let gridRes = await fetchGame(id);
-    let result = { stage: gridRes.stage, gameId: id, isHost, grid: gridRes.grid, turn: gridRes.turn, winner: gridRes.winner, gridSize: gridRes.gridSize };
+    let result = { stage: gridRes.stage, gameId: id, isHost, grid: gridRes.grid, turn: gridRes.turn, winner: gridRes.winner, gridSize: gridRes.gridSize, teamType: gridRes.teamType };
     return result;
 }
 
-export const gameStart = async (id, turn, stage) => {
-    let update = await updateGame({ turn, stage }, id);
-    let gridRes = await fetchGame(id);
-    let result = { stage, gameId: id, isHost: turn, grid: gridRes.grid, turn: gridRes.turn, winner: gridRes.winner, gridSize: gridRes.gridSize };
+export const gameStart = async (id, turn, stage, teamType) => {
+    let update = await updateGame({ turn, stage, teamType }, id);
+    let gridRes = await fetchGame(id)
+
+    let result = { stage, gameId: id, isHost: turn, grid: gridRes.grid, turn: gridRes.turn, winner: gridRes.winner, gridSize: gridRes.gridSize, teamType: gridRes.teamType };
     return result;
 }
 

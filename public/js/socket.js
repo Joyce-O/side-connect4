@@ -52,7 +52,7 @@ const addMessage = (msg) => {
   let stage = localStorage.getItem('stage') || msg.stage;
 
   if (stage === "BEGIN") {
-    msg.turn = param.get('isHost') == 1 ? 1 : 0;
+    msg.turn = param.get('isHost') == 1 ? 0 : 1;
   }
 
   if (stage == "COMPLETED") {

@@ -57,15 +57,19 @@ wss.on('connection', async (ws, req) => {
   ws.on('message', async (message) => {
     let formatMsg = JSON.parse(message);
 
-    const { turn, stage, cellId, cellValue } = formatMsg;
+    const { turn, stage, cellId, cellValue, teamType } = formatMsg;
     if (formatMsg.stage === "BEGIN") {
-      let game = await gameStart(gameId, turn, stage);
-      broadCastToPair(gameId, game, ws)
+      let game = await gameStart(gameId, turn, stage, teamType);
+
+      broadCastToPair(gameId, game, ws);
     }
 
     if (stage === "PLAYING") {
       let gamePlay = await gamePlaying(gameId, turn, stage, cellId, cellValue);
       broadCastToPair(gameId, gamePlay, ws)
+      if(gamePlay.teamType === "oneTeam"){
+        console.log("game type", gamePlay.teamType)
+      }
     }
   });
 
