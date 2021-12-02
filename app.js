@@ -1,17 +1,23 @@
-const express = require('express');
-const path = require('path');
-const url = require('url');
-import WebSocket from 'ws';
+const express = require("express");
+const path = require("path");
+const url = require("url");
+import WebSocket from "ws";
 import { nanoid } from "nanoid";
-const { createServer } = require('http');
+const { createServer } = require("http");
 import { initDBTables } from "./src/db/index";
-import { gameInit, gameStart, gamePlaying, gameRefresh } from "./src/controller/gameEvents";
+import {
+  gameInit,
+  gameStart,
+  gamePlaying,
+  gameRefresh,
+} from "./src/controller/gameEvents";
+import systemPlayer from "./src/controller/systemPlayer";
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/', function (req, res) {
+app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "./public", "index.html"));
 });
 
@@ -26,8 +32,7 @@ const broadCastToPair = (gameId, message) => {
       client.send(`${JSON.stringify(message)}`);
     }
   });
-
-}
+};
 
 const broadCastToSelf = (gameId, message, ws) => {
   clients.get(gameId).forEach((client) => {
@@ -35,13 +40,13 @@ const broadCastToSelf = (gameId, message, ws) => {
       client.send(`${JSON.stringify(message)}`);
     }
   });
+};
 
-}
-
-
-wss.on('connection', async (ws, req) => {
-  let { query: { gameId, isHost } } = url.parse(req.url, true);
-  let metadata; 
+wss.on("connection", async (ws, req) => {
+  let {
+    query: { gameId, isHost },
+  } = url.parse(req.url, true);
+  let metadata;
   if (clients.has(gameId)) {
     clients.get(gameId).push(ws);
     metadata = await gameRefresh(gameId, isHost);
@@ -51,39 +56,45 @@ wss.on('connection', async (ws, req) => {
     metadata = await gameInit(gameId, isHost);
   }
 
-  broadCastToSelf(gameId, metadata, ws)
+  broadCastToSelf(gameId, metadata, ws);
   // ws.send(`${JSON.stringify(metadata)}`);
 
-  ws.on('message', async (message) => {
+  ws.on("message", async (message) => {
     let formatMsg = JSON.parse(message);
 
-    const { turn, stage, cellId, cellValue } = formatMsg;
+    const { stage, cellId, cellValue, teamType } = formatMsg;
     if (formatMsg.stage === "BEGIN") {
-      let game = await gameStart(gameId, turn, stage);
-      broadCastToPair(gameId, game, ws)
+      let game = await gameStart(gameId, stage, teamType);
+
+      broadCastToPair(gameId, game, ws);
     }
 
     if (stage === "PLAYING") {
-      let gamePlay = await gamePlaying(gameId, turn, stage, cellId, cellValue);
-      broadCastToPair(gameId, gamePlay, ws)
+      let gamePlay = await gamePlaying(gameId, stage, cellId, cellValue);
+      broadCastToPair(gameId, gamePlay, ws);
+
+      if (gamePlay.teamType === "oneTeam" && !gamePlay.winner) {
+        gamePlay = await systemPlayer({ stage, gameId, grid: gamePlay.grid });
+        broadCastToPair(gameId, gamePlay, ws);
+      }
     }
   });
 
   ws.on("close", () => {
     clients.delete(ws);
-    console.log('WebSocket client exited!')
+    console.log("WebSocket client exited!");
   });
 });
 
-wss.on('open', () => {
-  console.log('WebSocket is open for connection!')
+wss.on("open", () => {
+  console.log("WebSocket is open for connection!");
 });
 
-wss.on('error', (err) => {
-  console.log('WebSocket server connection failed!', err);
+wss.on("error", (err) => {
+  console.log("WebSocket server connection failed!", err);
 });
 
 server.listen(8080, () => {
   initDBTables();
-  console.log('Listening on http://localhost:8080');
+  console.log("Listening on http://localhost:8080");
 });

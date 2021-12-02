@@ -3,13 +3,28 @@
 
 <head>
   <title>Side stacker game, varient for connect4</title>
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/modal.css" />
 </head>
 
 <body>
+  <div id="modal" class="modal">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Side Connect 4 Game</h2>
+      </div>
+      <p>Select team</p>
+      <div class="modal-body">
+        <button id="oneTeam">1 Player</button>
+        <button id="twoTeams">2 players</button>
+      </div>
+    </div>
+
+  </div>
   <div id="parent-container">
     <div class="player-sign">
-        <p class="player1-color" id="player1">player 1</p>
+      <p class="player1-color" id="player1">player 1</p>
       <p class="playerPointer" id="playerPointer1"></p>
 
     </div>
@@ -18,7 +33,7 @@
 
     </div>
     <div class="player-sign">
-        <p class="player0-color" id="player0">player 2</p>
+      <p class="player0-color" id="player0">player 2</p>
       <p class="playerPointer" id="playerPointer0"></p>
     </div>
   </div>
@@ -26,11 +41,11 @@
   <div class="game-control">
     <button id="button-start" type="button" class="btn green">Start</button>
     <button id="button-reset" type="button" class="btn">Reset</button>
-    <!-- Target -->
+
     <div class="clipboard">
       <input id="player0-link" value="" />
 
-      <!-- Trigger -->
+
       <button type="button" class="copy-btn" data-clipboard-target="#player0-link" data-clipboard-action="copy"
         disabled=true>
         <em class="fa fa-clipboard"></em>
@@ -38,9 +53,9 @@
     </div>
   </div>
 </body>
-<script type="module" src="/socket.js"></script>
-<script type="module" src="/utility.js"></script>
-<script type="module" src="/script.js"></script>
+<script type="module" src="/js/socket.js"></script>
+<script type="module" src="/js/utility.js"></script>
+<script type="module" src="/js/script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
