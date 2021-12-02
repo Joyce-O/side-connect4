@@ -33,6 +33,7 @@ const onMessage = (evt) => {
   }
 
   if (stage && stage === "PLAYING") {
+    
     playing(turn, grid, winner)
 
   }

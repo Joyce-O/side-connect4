@@ -1,5 +1,4 @@
 import { addMessage } from "./socket.js";
-import modal from "./modal.js";
 
 const container = document.getElementById("grid-container");
 const startBtn = document.getElementById("button-start");
@@ -23,7 +22,7 @@ const handlePlayerPointer = (player) => {
   const turn = cellValue == 1 ? 0 : 1;
   let cellId = player.target.id;
   let stage = localStorage.getItem('stage') || "PLAYING";
-
+  param.delete('turn');
   addMessage({ cellValue, turn, stage, cellId });
 };
 

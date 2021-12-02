@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 const { createServer } = require('http');
 import { initDBTables } from "./src/db/index";
 import { gameInit, gameStart, gamePlaying, gameRefresh } from "./src/controller/gameEvents";
+import systemPlayer from "./src/controller/systemPlayer";
 
 const app = express();
 
@@ -66,9 +67,12 @@ wss.on('connection', async (ws, req) => {
 
     if (stage === "PLAYING") {
       let gamePlay = await gamePlaying(gameId, turn, stage, cellId, cellValue);
-      broadCastToPair(gameId, gamePlay, ws)
-      if(gamePlay.teamType === "oneTeam"){
-        console.log("game type", gamePlay.teamType)
+      broadCastToPair(gameId, gamePlay, ws);
+
+      if(gamePlay.teamType === "oneTeam" && !gamePlay.winner){
+        gamePlay = await systemPlayer({ stage, gameId, turn, grid: gamePlay.grid });
+        broadCastToPair(gameId, gamePlay, ws);
+        
       }
     }
   });

@@ -39,7 +39,7 @@ export const gamePlaying = async (gameId, turn, stage, cellId, cellValue) => {
     // console.log(`playing params: ${gameId}, ${turn}, ${stage}, ${cellId}, ${cellValue}`)
     let gridRes = await fetchGame(gameId);
 
-    let newCell = await handleSideStack(gridRes.grid, cellId, cellValue);
+    let newCell = await handleSideStack(gridRes.grid, cellId);
     cellId = newCell;
 
     await updateGame({ turn, stage }, gameId);

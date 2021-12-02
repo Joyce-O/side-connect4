@@ -2,6 +2,7 @@ const selecetdCell = (grid, cellId, col) => {
   let midPart = 3 / 2;
   let row = grid[col];
   let origCellId = cellId.slice(1);
+
   cellId += '2'//append placeholder value
 
   //Check if left side is fillled
@@ -22,6 +23,9 @@ const selecetdCell = (grid, cellId, col) => {
 };
 
 export const handleSideStack = (grid, cellId) => {
+  if(cellId && cellId.length === 3){
+    cellId = cellId.slice(0, 2);
+  }
   let col = cellId.charAt(0);
   let newId = selecetdCell(grid, cellId, col);
 

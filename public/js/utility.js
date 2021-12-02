@@ -46,6 +46,10 @@ export const begin = (stage, turn, grid) => {
 };
 
 export function playing(turn, grid, winner, stage) {
+
+    newRelativePathQuery = window.location.pathname + '?' + param.toString();
+    history.pushState(null, '', newRelativePathQuery);
+
     buildGrid(grid);
     if (turn == 1) {
         playerTurn.innerHTML = "Host's turn";
