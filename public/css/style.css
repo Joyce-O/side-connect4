@@ -145,3 +145,7 @@ clipboard-btn::after {
   text-align: center;
   font-style: italic;
 }
+
+.midCell {
+  cursor: not-allowed;
+}
