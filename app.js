@@ -14,6 +14,7 @@ import {
 import systemPlayer from "./src/controller/systemPlayer";
 
 const app = express();
+let PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -94,7 +95,7 @@ wss.on("error", (err) => {
   console.log("WebSocket server connection failed!", err);
 });
 
-server.listen(8080, () => {
+server.listen(PORT, () => {
   initDBTables();
-  console.log("Listening on http://localhost:8080");
+  console.log(`Listening on http://localhost:${PORT}`);
 });
