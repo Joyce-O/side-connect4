@@ -1,5 +1,7 @@
 ### side-connect4
 
+App is hosted here <https://side-connnect.herokuapp.com/>
+
 ##### Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
@@ -38,8 +40,6 @@ To test
 >> $ yarn test
 
 <img width="1085" alt="sidesgame" src="https://user-images.githubusercontent.com/26967919/143244020-de2ccdd0-675a-4d3a-9ee0-0d3556e336e7.png">
-
-App is hosted here <https://side-connnect.herokuapp.com/>
 
 TODO: 
 - Improve system player logic, currently plays randomly 
