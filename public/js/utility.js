@@ -101,4 +101,17 @@ export const resetGame = (evt) => {
   }
 };
 
+export const checkMiddles = (origCellId) => {
+  const cell =  document.getElementById(origCellId);
+ let newCellId = origCellId.slice(1);
+ let midPart = 3/2;
+
+  if (newCellId !== -1 && newCellId / 2 == midPart) {
+   cell.classList.add("midCell");
+   cell.contentEditable = false;
+  return false;
+  }
+
+}
+
 resetBtn.addEventListener("click", resetGame);

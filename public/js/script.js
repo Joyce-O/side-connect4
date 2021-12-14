@@ -1,4 +1,5 @@
 import { addMessage } from "./socket.js";
+import {checkMiddles} from "./utility.js";
 
 const container = document.getElementById("grid-container");
 const startBtn = document.getElementById("button-start");
@@ -21,7 +22,7 @@ const handlePlayerPointer = (player) => {
   const turn = localStorage.getItem("turn");
   const cellValue = param.get("isHost");
 
-  if(turn != cellValue) return;
+  if(turn != cellValue || (checkMiddles(player.target.id) == false)) return;
 
   let cellId = player.target.id;
   let stage = localStorage.getItem('stage') || "PLAYING";
