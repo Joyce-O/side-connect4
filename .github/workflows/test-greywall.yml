@@ -1,0 +1,22 @@
+name: Test Greywall Sandbox
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Greywall
+        uses: Joyce-O/greywall@feat/github-action
+        with:
+          allow-network: "api.anthropic.com,github.com"
+          deny-read: "**/.env*"
+
+      - name: Verify install
+        run: greywall --version
+
+      - name: Check config
+        run: cat ~/.config/greywall/greywall.json
